@@ -43,31 +43,13 @@ Column {
         }
         QGCComboBox {
             //id: displayMode
-            model: ["IR", "RGB", "PIP"]
+            model: [qsTr("PIP"), qsTr("IR"), qsTr("RGB")]
             onActivated: {
-                switch (currentIndex) {
-                case 0:
-                    _activeVehicle.sendCommand(_activeVehicle, //ID
-                                               183, //MAV_CMD
-                                               true, //showError
-                                               13, //servo instance
-                                               1000) //servo value in us
-                    break
-                case 1:
-                    _activeVehicle.sendCommand(_activeVehicle, //ID
-                                               183, //MAV_CMD
-                                               true, //showError
-                                               13, //servo instance
-                                               1500) //servo value in us
-                    break
-                case 2:
-                    _activeVehicle.sendCommand(_activeVehicle, //ID
-                                               183, //MAV_CMD
-                                               true, //showError
-                                               13, //servo instance
-                                               2000) //servo value in us
-                    break
-                }
+                _activeVehicle.sendCommand(_activeVehicle, //ID
+                                           183, //MAV_CMD
+                                           true, //showError
+                                           13, //servo instance
+                                           index * 500 + 1000) //servo value in us
             }
         }
 
@@ -104,37 +86,6 @@ Column {
         QGCLabel {
             text: qsTr("REC")
         }
-
-        /*QGCButton { // Button to start/stop video recording and trigger a photo
-            text: "REC"
-            onClicked: if (videoMode.checked) {
-                           if (_recording) { //stop recording
-                               _activeVehicle.sendCommand(_activeVehicle, //ID
-                                                          183, //MAV_CMD
-                                                          true, //showError
-                                                          11, //servo instance
-                                                          1000); //servo value in us
-                               _recording = false;
-                           } else { //start recording
-                               _activeVehicle.sendCommand(_activeVehicle, //ID
-                                                          183, //MAV_CMD
-                                                          true, //showError
-                                                          11, //servo instance
-                                                          2000); //servo value in us
-                               _recording = true;
-                           }
-                       } else { //take photo
-                           //_activeVehicle.sendCommand(_activeVehicle,203,true,0,0,0,0,1,0,0);
-                           _activeVehicle.sendCommand(_activeVehicle, //ID
-                                                      184, //repeat servo
-                                                      true, //showError
-                                                      11, //servo instance
-                                                      2000, //servo value in us
-                                                      1, //count
-                                                      1) //time
-                       }
-        }*/
-
         Item {
             anchors.margins: ScreenTools.defaultFontPixelHeight / 2
             height: ScreenTools.defaultFontPixelHeight * 2
