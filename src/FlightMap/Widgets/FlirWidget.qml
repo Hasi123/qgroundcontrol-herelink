@@ -162,5 +162,34 @@ Column {
                            }
             }
         }
+
+    /*    QGCLabel {
+            text: qsTr("Gimbal °")
+        }
+        QGCButton {
+            text: qsTr("Zentr.")
+            onClicked: {
+                _activeVehicle.sendCommand(_activeVehicle, //ID
+                                           184, //repeat servo
+                                           true, //showError
+                                           7, //servo instance
+                                           2100, //servo value in us
+                                           1, //count
+                                           4) //time
+            }
+        }*/
+    }
+    QGCButton {
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: qsTr("Gimbal Zentrieren")
+        onClicked: {
+            _activeVehicle.sendCommand(_activeVehicle, //ID
+                                       184, //repeat servo
+                                       true, //showError
+                                       7, //servo instance
+                                       2100, //servo value in us
+                                       1, //count
+                                       4) //time
+        }
     }
 }
